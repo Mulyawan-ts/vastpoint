@@ -1,0 +1,28 @@
+version: '3'
+
+tasks:
+  dev:
+    deps:
+      - go-api
+      - python-analytics
+      - nuxt-frontend
+
+  go-api:
+    dir: backend
+    cmds:
+      - go run cmd/api/main.go
+
+  seeder:
+    dir: backend/cmd/seeder
+    cmds:
+      - go run main.go
+
+  python-analytics:
+    dir: backend/analytics
+    cmds:
+      - uv run main.py
+
+  nuxt-frontend:
+    dir: frontend
+    cmds:
+      - pnpm dev
