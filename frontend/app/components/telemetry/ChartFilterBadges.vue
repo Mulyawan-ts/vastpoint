@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useDashboardStore } from '~/stores/useDashboardStore'
-const dashboardStore = useDashboardStore()
+import { useDashboardStore } from "~/stores/useDashboardStore";
+const dashboardStore = useDashboardStore();
 
-const sensors = ['ALL', 'SAN-PLANT-A', 'SAN-PLANT-B', 'WADUK-01', 'WADUK-02']
+const sensors = ["ALL", "SAN-PLANT-A", "SAN-PLANT-B", "WADUK-01", "WADUK-02"];
 </script>
 
 <template>

@@ -1,34 +1,38 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useDashboardStore } from '~/stores/useDashboardStore'
-import type { TelemetryItem } from '~/composables/useTelemetryChart'
+import { computed } from "vue";
+import { useDashboardStore } from "~/stores/useDashboardStore";
+import type { TelemetryItem } from "~/composables/useTelemetryChart";
 
 const props = defineProps<{
-  telemetry: TelemetryItem[]
-}>()
+  telemetry: TelemetryItem[];
+}>();
 
-const dashboardStore = useDashboardStore()
+const dashboardStore = useDashboardStore();
 
 // Filter data telemetri berdasarkan sensor yang dipilih di Pinia
 const filteredTelemetry = computed(() => {
-  if (!props.telemetry) return []
-  if (dashboardStore.selectedSensor === 'ALL') {
-    return props.telemetry
+  if (!props.telemetry) return [];
+  if (dashboardStore.selectedSensor === "ALL") {
+    return props.telemetry;
   }
-  return props.telemetry.filter((item) => item.sensor_id === dashboardStore.selectedSensor)
-})
+  return props.telemetry.filter(
+    (item) => item.sensor_id === dashboardStore.selectedSensor,
+  );
+});
 
 const getStatusBadge = (level: number) => {
-  if (level > 4.5) return 'CRITICAL'
-  if (level > 3.0) return 'WARNING'
-  return 'NORMAL'
-}
+  if (level > 4.5) return "CRITICAL";
+  if (level > 3.0) return "WARNING";
+  return "NORMAL";
+};
 </script>
 
 <template>
   <section class="card-panel">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="m-0 text-sm font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+      <h3
+        class="m-0 text-sm font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2"
+      >
         <div class="i-lucide-activity text-sky-500 text-base" />
         Telemetry Feed Stream (Go)
       </h3>
@@ -52,7 +56,9 @@ const getStatusBadge = (level: number) => {
             :key="item.sensor_id + item.timestamp"
             class="border-b border-slate-100 dark:border-slate-800/60"
           >
-            <td class="p-2.5 font-bold font-mono text-slate-800 dark:text-slate-200">
+            <td
+              class="p-2.5 font-bold font-mono text-slate-800 dark:text-slate-200"
+            >
               {{ item.sensor_id }}
             </td>
             <td class="p-2.5 font-mono text-slate-600 dark:text-slate-300">
@@ -65,8 +71,8 @@ const getStatusBadge = (level: number) => {
                   getStatusBadge(item.water_level) === 'CRITICAL'
                     ? 'bg-rose-100 dark:bg-rose-950/80 text-rose-600 dark:text-rose-400'
                     : getStatusBadge(item.water_level) === 'WARNING'
-                    ? 'bg-amber-100 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400'
-                    : 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400',
+                      ? 'bg-amber-100 dark:bg-amber-950/80 text-amber-600 dark:text-amber-400'
+                      : 'bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400',
                 ]"
               >
                 {{ getStatusBadge(item.water_level) }}
@@ -75,7 +81,8 @@ const getStatusBadge = (level: number) => {
           </tr>
           <tr v-if="filteredTelemetry.length === 0">
             <td colspan="3" class="p-4 text-center text-sub italic">
-              Tidak ada data telemetri untuk sensor {{ dashboardStore.selectedSensor }}.
+              Tidak ada data telemetri untuk sensor
+              {{ dashboardStore.selectedSensor }}.
             </td>
           </tr>
         </tbody>
