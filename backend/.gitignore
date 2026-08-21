@@ -1,1 +1,6 @@
 *.db
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.ruff_cache/
