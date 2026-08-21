@@ -1,15 +1,14 @@
-from app.modules.telemetry.repository import TelemetryAnalyticsRepository
+from app.modules.telemetry.queries.anomaly_query import AnomalyQuery
+from app.modules.telemetry.queries.trend_query import TrendQuery
 
 
-class TelemetryAnalyticsService:
-    def __init__(self):
-        self.repository = TelemetryAnalyticsRepository()
+class TelemetryService:
+    def __init__(self) -> None:
+        self.trend_query = TrendQuery()
+        self.anomaly_query = AnomalyQuery()
 
-    def get_summary_analytics(self) -> dict:
-        records = self.repository.get_water_level_trends()
+    def fetch_trends(self, time_range: str = "all") -> list[dict[str, object]]:
+        return self.trend_query.execute(time_range)
 
-        return {
-            "status": "success",
-            "total_sensors_analyzed": len(records),
-            "data": records,
-        }
+    def fetch_anomalies(self, threshold: float = 2.0) -> list[dict[str, object]]:
+        return self.anomaly_query.execute(threshold_z=threshold)
