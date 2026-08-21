@@ -9,7 +9,7 @@ export const useAnomalyQuery = () => {
       )
       return res.data || []
     },
-    refetchInterval: 5000, // Sync otomatis setiap 5 detik
+    refetchInterval: 5000,
   })
 
   return { anomalyQuery }
