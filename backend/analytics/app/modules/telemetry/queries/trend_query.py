@@ -1,4 +1,5 @@
 import duckdb
+
 from app.config.database import DuckDBManager
 
 

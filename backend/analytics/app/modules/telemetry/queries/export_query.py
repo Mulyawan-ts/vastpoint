@@ -1,6 +1,8 @@
 import tempfile
 from pathlib import Path
+
 import duckdb
+
 from app.config.database import DuckDBManager
 
 

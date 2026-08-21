@@ -1,4 +1,5 @@
 from litestar import Controller, Response, get
+
 from app.modules.telemetry.service import TelemetryService
 
 
@@ -15,7 +16,12 @@ class TelemetryController(Controller):
     async def get_anomalies(self, threshold: float = 2.0) -> dict[str, object]:
         service = TelemetryService()
         data = service.fetch_anomalies(threshold=threshold)
-        return {"status": "success", "threshold_z": threshold, "total": len(data), "data": data}
+        return {
+            "status": "success",
+            "threshold_z": threshold,
+            "total": len(data),
+            "data": data,
+        }
 
     @get("/export/parquet")
     async def export_parquet(self) -> Response[bytes]:
