@@ -1,12 +1,14 @@
 <script setup lang="ts">
 const { telemetryQuery, analyticsQuery, alertsQuery, alertHistoryQuery } = useIocQueries()
 const { actuatorQuery } = useActuatorQuery()
+const { anomalyQuery } = useAnomalyQuery()
 
 const liveTelemetry = computed(() => telemetryQuery.data.value || [])
 const analyticsSummary = computed(() => analyticsQuery.data.value || [])
 const activeAlerts = computed(() => alertsQuery.data.value || [])
 const alertLogs = computed(() => alertHistoryQuery.data.value || [])
 const actuators = computed(() => actuatorQuery.data.value || [])
+const anomalies = computed(() => anomalyQuery.data.value || [])
 </script>
 
 <template>
@@ -27,6 +29,9 @@ const actuators = computed(() => actuatorQuery.data.value || [])
         <TelemetryTable :telemetry="liveTelemetry" />
         <AnalyticsCards :analytics="analyticsSummary" />
       </div>
+
+      <!-- Pasang Komponen Anomaly Detection di Sini -->
+      <AnomalyCard :anomalies="anomalies" />
 
       <AlertHistoryTable :logs="alertLogs" />
     </div>
