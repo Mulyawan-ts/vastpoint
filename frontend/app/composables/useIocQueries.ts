@@ -1,8 +1,8 @@
 export const useIocQueries = () => {
-  const { telemetryQuery } = useTelemetryQuery()
-  const { selectedRange, analyticsQuery } = useAnalyticsQuery()
-  const { alertsQuery, alertHistoryQuery } = useAlertQuery()
-  const { goHealthQuery, pythonHealthQuery } = useHealthQuery()
+  const { telemetryQuery } = useTelemetryQuery();
+  const { selectedRange, analyticsQuery } = useAnalyticsQuery();
+  const { alertsQuery, alertHistoryQuery } = useAlertQuery();
+  const { goHealthQuery, pythonHealthQuery } = useHealthQuery();
 
   return {
     selectedRange,
@@ -12,5 +12,5 @@ export const useIocQueries = () => {
     alertHistoryQuery,
     goHealthQuery,
     pythonHealthQuery,
-  }
-}
+  };
+};

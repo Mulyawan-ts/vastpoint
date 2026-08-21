@@ -1,41 +1,45 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from "vue";
 
 const props = defineProps<{
   anomalies: Array<{
-    id: number
-    sensor_id: string
-    water_level: number
-    expected_avg: number
-    z_score: number
-    timestamp: string
-  }>
-}>()
+    id: number;
+    sensor_id: string;
+    water_level: number;
+    expected_avg: number;
+    z_score: number;
+    timestamp: string;
+  }>;
+}>();
 
-const safeAnomalies = computed(() => props.anomalies || [])
+const safeAnomalies = computed(() => props.anomalies || []);
 
 const formatDate = (isoStr: string) => {
-  if (!isoStr) return '-'
+  if (!isoStr) return "-";
   try {
-    return new Date(isoStr).toLocaleTimeString('id-ID', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    })
+    return new Date(isoStr).toLocaleTimeString("id-ID", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
   } catch {
-    return isoStr
+    return isoStr;
   }
-}
+};
 </script>
 
 <template>
   <section class="card-panel">
     <div class="flex items-center justify-between mb-4">
-      <h2 class="m-0 text-lg text-amber-600 dark:text-amber-400 flex items-center gap-2 font-bold">
+      <h2
+        class="m-0 text-lg text-amber-600 dark:text-amber-400 flex items-center gap-2 font-bold"
+      >
         <div class="i-lucide-activity text-xl" />
         DuckDB Anomaly & Outlier Detection (Z-Score &ge; 2.0)
       </h2>
-      <span class="text-xs bg-amber-100 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 px-2.5 py-0.5 rounded-full font-bold">
+      <span
+        class="text-xs bg-amber-100 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 px-2.5 py-0.5 rounded-full font-bold"
+      >
         {{ safeAnomalies.length }} Detected
       </span>
     </div>
@@ -61,12 +65,20 @@ const formatDate = (isoStr: string) => {
             :key="item.id"
             class="border-b border-slate-100 dark:border-slate-800/60"
           >
-            <td class="p-2.5 font-mono text-slate-500">{{ formatDate(item.timestamp) }}</td>
-            <td class="p-2.5 font-bold text-slate-800 dark:text-slate-200">{{ item.sensor_id }}</td>
-            <td class="p-2.5 font-bold text-amber-600 dark:text-amber-400">{{ item.water_level }}m</td>
+            <td class="p-2.5 font-mono text-slate-500">
+              {{ formatDate(item.timestamp) }}
+            </td>
+            <td class="p-2.5 font-bold text-slate-800 dark:text-slate-200">
+              {{ item.sensor_id }}
+            </td>
+            <td class="p-2.5 font-bold text-amber-600 dark:text-amber-400">
+              {{ item.water_level }}m
+            </td>
             <td class="p-2.5 text-slate-500">{{ item.expected_avg }}m</td>
             <td class="p-2.5">
-              <span class="bg-amber-100 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded text-[10px] font-bold">
+              <span
+                class="bg-amber-100 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded text-[10px] font-bold"
+              >
                 {{ item.z_score }} &sigma;
               </span>
             </td>

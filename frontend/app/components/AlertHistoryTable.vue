@@ -1,40 +1,42 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from "vue";
 
 const props = withDefaults(
   defineProps<{
     logs?: Array<{
-      id: number
-      sensor_id: string
-      water_level: number
-      message?: string
-      created_at: string
-    }>
+      id: number;
+      sensor_id: string;
+      water_level: number;
+      message?: string;
+      created_at: string;
+    }>;
   }>(),
   {
     logs: () => [],
-  }
-)
+  },
+);
 
 // Menjamin safeLogs selalu berupa array meskipun data dari API belum siap
-const safeLogs = computed(() => props.logs || [])
+const safeLogs = computed(() => props.logs || []);
 
 const formatDate = (isoStr: string) => {
-  if (!isoStr) return '-'
+  if (!isoStr) return "-";
   try {
-    return new Date(isoStr).toLocaleString('id-ID', {
-      dateStyle: 'short',
-      timeStyle: 'medium',
-    })
+    return new Date(isoStr).toLocaleString("id-ID", {
+      dateStyle: "short",
+      timeStyle: "medium",
+    });
   } catch {
-    return isoStr
+    return isoStr;
   }
-}
+};
 </script>
 
 <template>
   <section class="card-panel">
-    <h2 class="m-0 text-lg text-rose-600 dark:text-rose-400 mb-4 flex items-center gap-2 font-bold">
+    <h2
+      class="m-0 text-lg text-rose-600 dark:text-rose-400 mb-4 flex items-center gap-2 font-bold"
+    >
       <div class="i-lucide-history text-xl" />
       Alert Incident Logs (SQLite)
     </h2>
@@ -59,11 +61,19 @@ const formatDate = (isoStr: string) => {
             :key="log.id"
             class="border-b border-slate-100 dark:border-slate-800/60"
           >
-            <td class="p-2.5 font-mono text-slate-500">{{ formatDate(log.created_at) }}</td>
-            <td class="p-2.5 font-bold text-slate-800 dark:text-slate-200">{{ log.sensor_id }}</td>
-            <td class="p-2.5 font-bold text-rose-600 dark:text-rose-400">{{ log.water_level }}m</td>
+            <td class="p-2.5 font-mono text-slate-500">
+              {{ formatDate(log.created_at) }}
+            </td>
+            <td class="p-2.5 font-bold text-slate-800 dark:text-slate-200">
+              {{ log.sensor_id }}
+            </td>
+            <td class="p-2.5 font-bold text-rose-600 dark:text-rose-400">
+              {{ log.water_level }}m
+            </td>
             <td class="p-2.5">
-              <span class="bg-rose-100 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 px-2 py-0.5 rounded text-[10px] font-bold">
+              <span
+                class="bg-rose-100 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 px-2 py-0.5 rounded text-[10px] font-bold"
+              >
                 CRITICAL EXCEEDED
               </span>
             </td>

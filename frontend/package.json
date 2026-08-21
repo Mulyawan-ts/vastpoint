@@ -7,22 +7,29 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "prettier --check .",
+    "format": "prettier --write ."
   },
   "dependencies": {
+    "@pinia/nuxt": "^1.0.2",
     "@tanstack/vue-query": "^5.101.4",
     "chart.js": "^4.5.1",
     "jspdf": "^4.2.1",
     "jspdf-autotable": "^5.0.8",
     "nuxt": "^4.5.2",
+    "pinia": "^4.0.3",
     "vue": "^3.5.41",
     "vue-chartjs": "^5.3.4",
     "vue-router": "^5.2.0",
     "vue-sonner": "^2.0.9"
   },
   "devDependencies": {
+    "@nuxt/eslint": "^1.17.0",
     "@nuxtjs/color-mode": "^4.0.1",
     "@unocss/nuxt": "^66.8.0",
-    "@vueuse/nuxt": "^14.4.0"
+    "@vueuse/nuxt": "^14.4.0",
+    "eslint": "^10.8.1",
+    "prettier": "^3.9.6"
   }
 }
